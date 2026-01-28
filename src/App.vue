@@ -1,14 +1,21 @@
 <script setup lang="ts">
+import ProductList from './components/ProductList.vue';
+import AppHeader from './components/AppHeader.vue';
+
 </script>
 
 <template>
-  <main>
-    <h1>VueJS E-shop Gallery Kata</h1>
+  <AppHeader />
+  <main class="container">
+    <ProductList />
   </main>
 </template>
 
 <style scoped>
-main {
-  padding: 1rem;
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 </style>
+
