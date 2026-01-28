@@ -2,12 +2,15 @@
 import { onMounted, ref } from 'vue'
 import type { Product } from '../domain/product/Product'
 import { FakeStoreProductRepository } from '../infrastructure/product/FakeStoreProductRepository'
+import { useCartStore } from '../stores/cartStore'
 
 const products = ref<Product[]>([])
 const loading = ref(true)
 const error = ref(false)
 
 const repository = new FakeStoreProductRepository()
+
+const cartStore = useCartStore()
 
 onMounted(async () => {
   try {
@@ -38,7 +41,10 @@ onMounted(async () => {
           <p class="price">{{ product.price }} €</p>
         </div>
 
-        <button>Add to Cart</button>
+        <button @click="cartStore.addToCart(product)">
+          Add to Cart
+        </button>
+
       </article>
     </div>
   </section>
