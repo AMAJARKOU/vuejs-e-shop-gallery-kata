@@ -20,4 +20,5 @@ npm run dev
   - Add / remove items
   - Increase / decrease quantity
 - Cart state management using Pinia
-- Navigation between Product List and Cart page usine Vue Router
+- Navigation between Product List and Cart page using Vue Router
+- Automatic 10% discount applied when cart total exceeds the defined threshold
