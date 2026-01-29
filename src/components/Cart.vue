@@ -90,8 +90,9 @@ ul {
 
 .info {
     display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
     font-size: 0.9rem;
 }
 
