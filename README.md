@@ -4,6 +4,9 @@
 - Vue 3
 - Vite
 - TypeScript
+- Pinia (state management)
+- Vue Router (routing)
+- Vitest (unit testing)
 
 ## Setup
 
@@ -21,4 +24,10 @@ npm run dev
   - Increase / decrease quantity
 - Cart state management using Pinia
 - Navigation between Product List and Cart page using Vue Router
-- Automatic 10% discount applied when cart total exceeds the defined threshold
+- Automatic 10% discount applied when cart total reaches 1000 €
+
+
+## Quality & Testing
+
+- Unit tests for Cart business logic (Pinia store)
+- Unit tests for Discount rule and calculation
