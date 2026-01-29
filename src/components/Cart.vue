@@ -40,7 +40,20 @@ const cart = useCartStore()
         </ul>
 
         <div v-if="cart.items.length" class="total">
-            Total: <strong>{{ cart.totalPrice.toFixed(2) }} €</strong>
+            <p>
+                Subtotal:
+                <strong>{{ cart.totalPrice.toFixed(2) }} €</strong>
+            </p>
+
+            <p v-if="cart.hasDiscount" class="discount">
+                Discount (10%):
+                <strong>-{{ cart.discountAmount.toFixed(2) }} €</strong>
+            </p>
+
+            <p class="final">
+                Total:
+                <strong>{{ cart.totalWithDiscount.toFixed(2) }} €</strong>
+            </p>
         </div>
     </section>
 </template>
@@ -104,6 +117,16 @@ ul {
     border-radius: 8px;
     padding: 1rem;
     text-align: center;
+}
+
+.discount {
+    color: #2e7d32;
+    font-size: 0.95rem;
+}
+
+.final {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
 }
 
 @media (max-width: 600px) {

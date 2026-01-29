@@ -2,6 +2,9 @@ import { defineStore } from 'pinia'
 import type { Product } from '../domain/product/Product'
 import type { CartItem } from '../domain/cart/CartItem'
 
+const DISCOUNT_THRESHOLD = 1000
+const DISCOUNT_RATE = 0.1
+
 export const useCartStore = defineStore('cart', {
     state: () => ({
         items: [] as CartItem[],
@@ -16,6 +19,18 @@ export const useCartStore = defineStore('cart', {
                 (sum, item) => sum + item.product.price * item.quantity,
                 0
             ),
+
+        hasDiscount(): boolean {
+            return this.totalPrice >= DISCOUNT_THRESHOLD
+        },
+
+        discountAmount(): number {
+            return this.hasDiscount ? this.totalPrice * DISCOUNT_RATE : 0
+        },
+
+        totalWithDiscount(): number {
+            return this.totalPrice - this.discountAmount
+        },
     },
 
     actions: {
