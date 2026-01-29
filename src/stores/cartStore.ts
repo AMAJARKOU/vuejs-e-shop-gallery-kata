@@ -4,10 +4,11 @@ import type { CartItem } from '../domain/cart/CartItem'
 
 const DISCOUNT_THRESHOLD = 1000
 const DISCOUNT_RATE = 0.1
+const CART_STORAGE_KEY = 'e-shop-cart'
 
 export const useCartStore = defineStore('cart', {
     state: () => ({
-        items: [] as CartItem[],
+        items: JSON.parse(localStorage.getItem(CART_STORAGE_KEY) || '[]') as CartItem[],
     }),
 
     getters: {
@@ -46,12 +47,16 @@ export const useCartStore = defineStore('cart', {
             } else {
                 this.items.push({ product, quantity: 1 })
             }
+            
+            this.persistCart()
         },
 
         removeFromCart(productId: number) {
             this.items = this.items.filter(
                 (item) => item.product.id !== productId
             )
+
+            this.persistCart()
         },
 
         updateQuantity(productId: number, quantity: number) {
@@ -64,6 +69,7 @@ export const useCartStore = defineStore('cart', {
                 this.removeFromCart(productId)
             } else {
                 item.quantity = quantity
+                this.persistCart()
             }
         },
 
@@ -72,6 +78,7 @@ export const useCartStore = defineStore('cart', {
             if (!item) return
 
             item.quantity++
+            this.persistCart()
         },
 
         decreaseQuantity(productId: number) {
@@ -80,12 +87,20 @@ export const useCartStore = defineStore('cart', {
 
             if (item.quantity > 1) {
                 item.quantity--
+                this.persistCart()
             }
         },
 
-
         clearCart() {
             this.items = []
+            this.persistCart()
+        },
+
+        persistCart() {
+            localStorage.setItem(
+                CART_STORAGE_KEY,
+                JSON.stringify(this.items)
+            )
         },
     },
 })

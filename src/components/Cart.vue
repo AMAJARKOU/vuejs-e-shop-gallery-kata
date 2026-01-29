@@ -12,49 +12,56 @@ const cart = useCartStore()
             Your cart is empty
         </p>
 
-        <ul v-else>
-            <li v-for="item in cart.items" :key="item.product.id" class="cart-item">
-                <div class="info">
-                    <strong>{{ item.product.title }}</strong>
-                    <span>{{ item.product.price }} €</span>
-                </div>
+        <template v-else>
+            <div class="cart-actions">
+                <button class="clear-btn" @click="cart.clearCart">
+                    Clear cart
+                </button>
+            </div>
 
-                <div class="actions">
-                    <button class="qty-btn" @click="cart.decreaseQuantity(item.product.id)"
-                        :disabled="item.quantity === 1">
-                        -
-                    </button>
+            <ul>
+                <li v-for="item in cart.items" :key="item.product.id" class="cart-item">
+                    <div class="info">
+                        <strong>{{ item.product.title }}</strong>
+                        <span>{{ item.product.price }} €</span>
+                    </div>
 
-                    <span class="qty">{{ item.quantity }}</span>
+                    <div class="actions">
+                        <button class="qty-btn" @click="cart.decreaseQuantity(item.product.id)"
+                            :disabled="item.quantity === 1">
+                            -
+                        </button>
 
-                    <button class="qty-btn" @click="cart.increaseQuantity(item.product.id)">
-                        +
-                    </button>
+                        <span class="qty">{{ item.quantity }}</span>
 
-                    <button class="remove-btn" @click="cart.removeFromCart(item.product.id)">
-                        x
-                    </button>
-                </div>
+                        <button class="qty-btn" @click="cart.increaseQuantity(item.product.id)">
+                            +
+                        </button>
 
-            </li>
-        </ul>
+                        <button class="remove-btn" @click="cart.removeFromCart(item.product.id)">
+                            x
+                        </button>
+                    </div>
+                </li>
+            </ul>
 
-        <div v-if="cart.items.length" class="total">
-            <p>
-                Subtotal:
-                <strong>{{ cart.totalPrice.toFixed(2) }} €</strong>
-            </p>
+            <div class="total">
+                <p>
+                    Subtotal:
+                    <strong>{{ cart.totalPrice.toFixed(2) }} €</strong>
+                </p>
 
-            <p v-if="cart.hasDiscount" class="discount">
-                Discount (10%):
-                <strong>-{{ cart.discountAmount.toFixed(2) }} €</strong>
-            </p>
+                <p v-if="cart.hasDiscount" class="discount">
+                    Discount (10%):
+                    <strong>-{{ cart.discountAmount.toFixed(2) }} €</strong>
+                </p>
 
-            <p class="final">
-                Total:
-                <strong>{{ cart.totalWithDiscount.toFixed(2) }} €</strong>
-            </p>
-        </div>
+                <p class="final">
+                    Total:
+                    <strong>{{ cart.totalWithDiscount.toFixed(2) }} €</strong>
+                </p>
+            </div>
+        </template>
     </section>
 </template>
 
@@ -127,6 +134,23 @@ ul {
 .final {
     margin-top: 0.5rem;
     font-size: 1.2rem;
+}
+
+.cart-actions {
+    margin-top: 1rem;
+}
+
+.clear-btn {
+    background: transparent;
+    border: 1px solid #eaeaea;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.clear-btn:hover {
+    border-color: #ff5252;
+    color: #ff5252;
 }
 
 @media (max-width: 600px) {

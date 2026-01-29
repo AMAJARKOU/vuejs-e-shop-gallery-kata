@@ -4,6 +4,7 @@ import { useCartStore } from '../cartStore'
 
 describe('cartStore', () => {
     beforeEach(() => {
+        localStorage.clear()
         setActivePinia(createPinia())
     })
 
