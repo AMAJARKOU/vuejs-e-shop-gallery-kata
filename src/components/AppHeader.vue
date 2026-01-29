@@ -2,18 +2,19 @@
 import { useCartStore } from '../stores/cartStore'
 
 const cart = useCartStore()
-const emit = defineEmits(['toggle-cart'])
 
 </script>
 
 <template>
   <header class="app-header">
     <div class="container">
-      <h1>E-Shop Gallery</h1>
+      <RouterLink to="/">
+        <h1>E-Shop Gallery</h1>
+      </RouterLink>
 
-      <button class="cart-button" @click="emit('toggle-cart')">
+      <RouterLink to="/cart" class="cart-button">
         Cart ({{ cart.totalItems }})
-      </button>
+      </RouterLink>
     </div>
   </header>
 </template>
