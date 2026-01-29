@@ -25,6 +25,7 @@ npm run dev
 - Cart state management using Pinia
 - Navigation between Product List and Cart page using Vue Router
 - Automatic 10% discount applied when cart total reaches 1000 €
+- Persistent Shopping Cart using localStorage
 
 
 ## Quality & Testing
